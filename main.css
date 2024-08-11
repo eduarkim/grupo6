@@ -132,3 +132,21 @@ td {
     height: 300px; /* Ajusta el alto según tus necesidades */
     object-fit: cover; /* Asegura que el video cubra todo el contenedor */
 }
+
+.clan-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 5px;
+    max-width: 200px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.clan-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+    
