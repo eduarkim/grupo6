@@ -7,30 +7,20 @@ async function fetchClans() {
 function createClanCard(clan) {
     const card = document.createElement('div');
     card.className = 'col-md-4 mb-4 clan-card'; 
-    
 
     const clanName = document.createElement('h2');
     clanName.textContent = clan.name;
     card.appendChild(clanName);
 
-    // Seleccionamos una imagen aleatoria de los personajes del clan
     const randomCharacter = clan.characters[Math.floor(Math.random() * clan.characters.length)];
     const clanImage = document.createElement('img');
     clanImage.className = 'img-fluid';
-  /*   const placeholderImages = [
-        'https://i.pinimg.com/originals/89/a8/9f/89a89f3b2248784262a2280ecbb4e3fb.jpg',
-    'https://i.pinimg.com/1200x/f0/70/dc/f070dc410d14597b0cf0ec2d0c1bcf15.jpg',
-    'https://static.wikia.nocookie.net/naruto/images/7/70/Tapiz_Clanes.png/revision/latest?cb=20120712182644&path-prefix=es',
-    'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057'
-     
-    ]; */
+
     if (randomCharacter.images && randomCharacter.images.length > 0) {
         clanImage.src = randomCharacter.images[0];
     } else {
-        
-       // const randomPlaceholder = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
-        clanImage.src = 'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057'
-        }
+        clanImage.src = 'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057';
+    }
     card.appendChild(clanImage);
 
     const characterList = document.createElement('ul');
@@ -44,14 +34,35 @@ function createClanCard(clan) {
     return card;
 }
 
-async function displayClans() {
-    const clans = await fetchClans();
+async function displayClans(clans) {
     const container = document.getElementById('clan-container');
+    container.innerHTML = ''; // Limpiar el contenedor
 
-    clans.forEach(clan => {
-        const card = createClanCard(clan);
-        container.appendChild(card);
+    if (clans.length === 0) {
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.className = 'no-results-message';
+        noResultsMessage.textContent = 'No se encontraron resultados';
+        container.appendChild(noResultsMessage);
+    } else {
+        clans.forEach(clan => {
+            const card = createClanCard(clan);
+            container.appendChild(card);
+        });
+    }
+}
+
+async function main() {
+    const clans = await fetchClans(); // Obtener todos los clanes
+    await displayClans(clans); // Mostrar todos los clanes inicialmente
+
+    const searchInput = document.getElementById('buscador');
+    searchInput.addEventListener('keyup', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredClans = clans.filter(clan =>
+            clan.name.toLowerCase().includes(searchTerm)
+        );
+        displayClans(filteredClans); // Mostrar clanes filtrados
     });
 }
 
-displayClans();
+main();
