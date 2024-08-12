@@ -163,3 +163,7 @@ td {
 
 
 }
+
+#favorite-container {
+    margin-top: 20px; /* Espacio entre secciones */
+}
