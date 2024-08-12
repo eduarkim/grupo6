@@ -42,13 +42,7 @@ function createTableRow(member) {
     debutCell.textContent = member.debut?.appearsIn || 'No hay información';
     row.appendChild(debutCell);
 
-    const uniqueTraitsCell = document.createElement('td');
-    if (Array.isArray(member.uniqueTraits)) {
-        uniqueTraitsCell.textContent = member.uniqueTraits.join(', ');
-    } else {
-        uniqueTraitsCell.textContent = 'No hay información';
-    }
-    row.appendChild(uniqueTraitsCell);
+
 
     return row;
 }
