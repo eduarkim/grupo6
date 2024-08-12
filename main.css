@@ -167,3 +167,10 @@ td {
 #favorite-container {
     margin-top: 20px; /* Espacio entre secciones */
 }
+
+.member-image{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
