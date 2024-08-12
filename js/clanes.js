@@ -1,3 +1,4 @@
+
 async function fetchClans() {
     const response = await fetch('https://narutodb.xyz/api/clan');
     const data = await response.json();
@@ -27,6 +28,7 @@ function createClanCard(clan) {
         clanImage.src = 'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057';
     }
     card.appendChild(clanImage);
+    console.log(clan); // Agregar esta línea para verificar los datos del clan en la consola
 
     const characterSubtitle = document.createElement('h5');
     characterSubtitle.textContent = 'Integrantes:';
@@ -63,16 +65,23 @@ async function displayClans(clans) {
     }
 }
 
+function normalizeString(str){
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
 async function main() {
     const clans = await fetchClans(); // Obtener todos los clanes
     await displayClans(clans); // Mostrar todos los clanes inicialmente
 
     const searchInput = document.getElementById('buscador');
     searchInput.addEventListener('keyup', () => {
-        const searchTerm = searchInput.value.toLowerCase();
+          const searchTerm = normalizeString(searchInput.value);
+   
         const filteredClans = clans.filter(clan =>
-            clan.name.toLowerCase().includes(searchTerm) || clan.characters.some(character => character.name.toLowerCase().includes(searchTerm))
-        );
+     
+      normalizeString(clan.name).includes(searchTerm) || clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
+    );
+     
         displayClans(filteredClans); // Mostrar clanes filtrados
     });
 }

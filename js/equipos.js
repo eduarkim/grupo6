@@ -311,16 +311,21 @@ async function displayTeams(teams) {
     }
 }
 
+function normalizeString(str){
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
 async function main() {
     const teams = await fetchTeams(); // Obtener todos los equipos
     await displayTeams(teams); // Mostrar todos los equipos inicialmente
 
     const searchInput = document.getElementById('buscador');
     searchInput.addEventListener('keyup', () => {
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchTerm = normalizeString(searchInput.value);
+ 
         const filteredTeams = teams.filter(team =>
-            team.name.toLowerCase().includes(searchTerm) || team.characters.some(character => character.name.toLowerCase().includes(searchTerm))
-        );
+   
+      normalizeString(team.name).includes(searchTerm) || team.characters.some(character => normalizeString(character.name).includes(searchTerm) )
+    );
         displayTeams(filteredTeams); // Mostrar equipos filtrados
     });
 }
