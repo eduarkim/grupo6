@@ -12,12 +12,14 @@ function createClanCard(clan) {
     clanName.textContent = clan.name;
     card.appendChild(clanName);
 
-    const randomCharacter = clan.characters[Math.floor(Math.random() * clan.characters.length)];
+    // Acceder al primer personaje del clan
+    const firstCharacter = clan.characters[0]; 
     const clanImage = document.createElement('img');
     clanImage.className = 'img-fluid';
 
-    if (randomCharacter.images && randomCharacter.images.length > 0) {
-        clanImage.src = randomCharacter.images[0];
+    // Verificar si el primer personaje tiene imágenes
+    if (firstCharacter && firstCharacter.images && firstCharacter.images.length > 0) {
+        clanImage.src = firstCharacter.images[0];
         clanImage.onerror = function() {
             clanImage.src = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
         };
@@ -69,7 +71,7 @@ async function main() {
     searchInput.addEventListener('keyup', () => {
         const searchTerm = searchInput.value.toLowerCase();
         const filteredClans = clans.filter(clan =>
-            clan.name.toLowerCase().includes(searchTerm)
+            clan.name.toLowerCase().includes(searchTerm) || clan.characters.some(character => character.name.toLowerCase().includes(searchTerm))
         );
         displayClans(filteredClans); // Mostrar clanes filtrados
     });
