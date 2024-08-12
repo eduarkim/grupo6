@@ -85,6 +85,7 @@ td {
     color: #888;
     margin-top: 50px;
 }
+/* 
 #mensajeNoResultados {
     text-align: center;
     color: red;
@@ -100,7 +101,7 @@ td {
 
 
 }
-
+ */
 .card {
     transition: transform 0.2s;
 }
@@ -139,20 +140,26 @@ td {
     object-fit: cover; /* Asegura que el video cubra todo el contenedor */
 }
 
-.clan-card {
+.tarjetas-card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
     margin: 5px;
     max-width: 200px;
     text-align: center;
-    display: inline-block;
-    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+
 }
 
-.clan-card img {
+.tarjetas-card img {
     max-width: 100%;
-    height: auto;
+    height: 8rem;
     border-radius: 8px;
+    object-fit: cover;
+  
+
+
 }
-    

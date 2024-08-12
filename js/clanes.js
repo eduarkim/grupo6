@@ -6,9 +6,9 @@ async function fetchClans() {
 
 function createClanCard(clan) {
     const card = document.createElement('div');
-    card.className = 'col-md-4 mb-4 clan-card'; 
+    card.className = 'col-md-4 mb-4 tarjetas-card'; 
 
-    const clanName = document.createElement('h2');
+    const clanName = document.createElement('h5');
     clanName.textContent = clan.name;
     card.appendChild(clanName);
 
@@ -18,10 +18,17 @@ function createClanCard(clan) {
 
     if (randomCharacter.images && randomCharacter.images.length > 0) {
         clanImage.src = randomCharacter.images[0];
+        clanImage.onerror = function() {
+            clanImage.src = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+        };
     } else {
         clanImage.src = 'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057';
     }
     card.appendChild(clanImage);
+
+    const characterSubtitle = document.createElement('h5');
+    characterSubtitle.textContent = 'Integrantes:';
+    card.appendChild(characterSubtitle);
 
     const characterList = document.createElement('ul');
     clan.characters.forEach(character => {
@@ -44,7 +51,10 @@ async function displayClans(clans) {
         noResultsMessage.textContent = 'No se encontraron resultados';
         container.appendChild(noResultsMessage);
     } else {
-        clans.forEach(clan => {
+        const uniqueClans = Array.from(new Set(clans.map(clan => clan.name)))
+            .map(name => clans.find(clan => clan.name === name));
+
+        uniqueClans.forEach(clan => {
             const card = createClanCard(clan);
             container.appendChild(card);
         });
