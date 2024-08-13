@@ -4,7 +4,10 @@ let favoriteClans = []; // Array para almacenar los clanes favoritos
 async function fetchClans() {
     const response = await fetch('https://narutodb.xyz/api/clan');
     const data = await response.json();
-    return data.clans;
+
+    const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
+    return filteredClans;
+  //  return data.clans;
 }
 
 function createClanCard(clan, isFavorite = false) {
@@ -41,6 +44,7 @@ function createClanCard(clan, isFavorite = false) {
     });
     card.appendChild(characterList);
 
+    
     // Crear estrella para favoritos
     const favoriteStar = document.createElement('span');
     favoriteStar.textContent = isFavorite ? '★' : '☆'; // Estrella rellena o vacía
@@ -51,7 +55,19 @@ function createClanCard(clan, isFavorite = false) {
     });
     card.appendChild(favoriteStar);
 
+    const detailButton = document.createElement('button');
+    detailButton.className = 'btn btn-primary btn-sm';
+    detailButton.textContent = 'Ver Detalles';
+    detailButton.addEventListener('click', () => {
+        showDetails('clan', clan.id); // Cambiar 'clan' y 'id' según sea necesario
+    });
+    card.appendChild(detailButton);
+
     return card;
+}
+
+function showDetails(type, id) {
+    window.location.href = `./detalleClan.html?type=${type}&id=${id}`;
 }
 
 function toggleFavorite(clan) {
@@ -71,14 +87,17 @@ function updateFavoriteSection() {
     const favoriteContainer = document.getElementById('favorite-container');
     favoriteContainer.innerHTML = ''; // Limpiar el contenedor de favoritos
     const favoriteSubtitle = document.createElement('h3');
+    favoriteSubtitle.className = 'text-center mb-4 w-100';
     favoriteSubtitle.textContent = 'Clanes Favoritos';
     favoriteContainer.appendChild(favoriteSubtitle);
     if (favoriteClans.length > 0) {
         favoriteClans.forEach(clan => {
             const card = createClanCard(clan, true); // true para estrella rellena
+            card.classList.add('clan-card');
             favoriteContainer.appendChild(card);
         });
-        favoriteContainer.style.display = 'block'; // Mostrar sección de favoritos
+        favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
+        favoriteContainer.style.flexWrap = 'wrap'; 
     } else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
     }
@@ -137,3 +156,4 @@ async function main() {
 }
 
 main();
+

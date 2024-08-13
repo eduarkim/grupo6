@@ -19,9 +19,9 @@ function createTableRow(member) {
     const imageCell = document.createElement('td');
     const image = document.createElement('img');
     image.className = 'member-image';
-    image.src = member.images[0] || 'https://via.placeholder.com/100';
+    image.src = member.images[0] || 'https://www.mundodeportivo.com/alfabeta/hero/2021/01/akatsuki-abj.jpg?width=1200&aspect_ratio=16:9';
     image.onerror = function() {
-        image.src = 'https://via.placeholder.com/100';
+        image.src = 'https://www.mundodeportivo.com/alfabeta/hero/2021/01/akatsuki-abj.jpg?width=1200&aspect_ratio=16:9';
     };
     imageCell.appendChild(image);
     row.appendChild(imageCell);

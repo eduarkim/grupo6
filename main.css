@@ -85,23 +85,7 @@ td {
     color: #888;
     margin-top: 50px;
 }
-/* 
-#mensajeNoResultados {
-    text-align: center;
-    color: red;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    background-color: azure;
-    padding: 1rem;
-    border-radius: 10px;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
 
-
-}
- */
 .card {
     transition: transform 0.2s;
 }
@@ -135,9 +119,9 @@ td {
 }
 
 .custom-video {
-    width: 100%; /* Ocupa todo el ancho de la página */
-    height: 300px; /* Ajusta el alto según tus necesidades */
-    object-fit: cover; /* Asegura que el video cubra todo el contenedor */
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
 }
 
 .tarjetas-card {
@@ -149,28 +133,54 @@ td {
     text-align: center;
     display: flex;
     flex-direction: column;
-
+ border-radius: 8px;
     text-align: center;
-
+transition: transform 0.2s;
 }
 
+
+
+.tarjetas-card:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+}
+
+#favorite-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; 
+}
 .tarjetas-card img {
     max-width: 100%;
     height: 8rem;
     border-radius: 8px;
     object-fit: cover;
   
-
-
 }
-
-#favorite-container {
-    margin-top: 20px; /* Espacio entre secciones */
-}
-
 .member-image{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     object-fit: cover;
+}
+
+#item-description {
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem; 
+    line-height: 1.5; 
+    text-align: justify; 
+    color: #333; 
+    margin: 10px 0;
+    padding: 10px; 
+    background-color: #f9f9f9; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.clan-card {
+    flex: 1 1 calc(33.333% - 16px); /* Ajustar el tamaño de las tarjetas */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Asegurar que todas las tarjetas tengan la misma altura */
 }
