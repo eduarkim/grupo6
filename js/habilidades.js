@@ -14,14 +14,14 @@ function createKekkeiGenkaiCard(kekkeiGenkai) {
     card.className = 'col-md-4 mb-4 tarjetas-card'; 
 
     const kgName = document.createElement('h5');
-    kgName.textContent =kekkei-genkai.name;
+    kgName.textContent =kekkei_genkai.name;
     card.appendChild(kgName);
 
     const kgImage = document.createElement('img');
     kgImage.className = 'img-fluid team-image';
     
-    if (kekkei-genkai.images && kekkei-genkai.images.length > 0) {
-        kgImage.src = kekkei-genkai.images[0];
+    if (kekkeigenkai.images && kekkeigenkai.images.length > 0) {
+        kgImage.src = kekkeigenkai.images[0];
         kgImage.onerror = function() {
             kgImage.src = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
         };
@@ -32,7 +32,7 @@ function createKekkeiGenkaiCard(kekkeiGenkai) {
     card.appendChild(kgImage);
 
     const description = document.createElement('p');
-    description.textContent = kekkei-genkai.description;
+    description.textContent = kekkeigenkai.description;
     card.appendChild(description);
 
     return card;
@@ -41,7 +41,7 @@ async function displayKekkeiGenkai(kekkeiGenkai) {
     const container = document.getElementById('kekkei-genkai-container');
     container.innerHTML = ''; // Limpiar el contenedor
 
-    if (kekkei-genkai.length === 0) {
+    if (kekkeigenkai.length === 0) {
         const noResultsMessage = document.createElement('div');
         noResultsMessage.className = 'no-results-message';
         noResultsMessage.textContent = 'No se encontraron resultados';
