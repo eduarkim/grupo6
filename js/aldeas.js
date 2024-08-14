@@ -1,3 +1,5 @@
+import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters } from './functions.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     init(); 
 });
@@ -23,16 +25,6 @@ async function fetchVillagesClansTeams() {
     }
 }
 
-async function fetchData(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;  
-}
-
-// Ordenar aldeas por cantidad de personajes
-function sortVillagesByCharacters(villages) {
-    return villages.sort((a, b) => b.characters.length - a.characters.length);
-}
 
 // Filtrar aldeas
 function filterVillages(villages, searchText, selectedClan, selectedTeam) {
@@ -71,20 +63,14 @@ async function init() {
         const selectedClan = clanSelect.value;
         const selectedTeam = teamSelect.value;
 
-        const filteredVillages = filterVillages(villages, searchText, selectedClan, selectedTeam);
-        const sortedVillages = sortVillagesByCharacters(filteredVillages);
+        const filteredVillages = filterVillages(villages, searchText, "", "");
+        const sortedVillages = sortVillagesByCharacters(filteredVillages, 0);
         displayVillages(sortedVillages);
+        console.log(selectedTeam);
+        
     }
 
     searchTextInput.addEventListener('input', updateResults);
     // clanSelect.addEventListener('change', updateResults);
-    // teamSelect.addEventListener('change', updateResults);
+    teamSelect.addEventListener('change', updateResults);
 }
-
-
-// Esta función eventualmente se debe eliminar
-// fetchVillages(villageURL).then(villages => {
-//     const sortedVillages = sortVillagesByCharacters(villages);
-//     console.table(sortedVillages);
-// });
-
