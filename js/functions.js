@@ -40,3 +40,20 @@ export function filterVillages(villages, searchText, selectedClan, selectedTeam)
         return hasSearchText && hasClan && hasTeam;
     });
 }
+
+export function generateClanOptions(clans) {
+    clans.forEach(clan => {
+        let option = document.createElement('option');
+        option.value = clan.name;
+        option.textContent = clan.name;
+        clanSelect.appendChild(option);
+    });
+}
+export function generateTeamOptions(teams) {
+    teams.forEach(team => {
+        let option = document.createElement('option');
+        option.value = team.name;
+        option.textContent = team.name;
+        teamSelect.appendChild(option);
+    });
+}
