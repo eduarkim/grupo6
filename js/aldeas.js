@@ -1,7 +1,7 @@
 import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters } from './functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    init(); 
+    init();
 });
 
 let villageURL = "https://narutodb.xyz/api/village";
@@ -16,12 +16,13 @@ async function fetchVillagesClansTeams() {
             fetchData(clanURL),
             fetchData(teamURL)
         ]);
-        return { villages: villages.villages,
+        return {
+            villages: villages.villages,
             clans: clans.clans,
             teams: teams.teams
         };
     } catch (error) {
-        console.error('Error en la adquisición de datos', error);    
+        console.error('Error en la adquisición de datos', error);
     }
 }
 
@@ -33,7 +34,7 @@ function filterVillages(villages, searchText, selectedClan, selectedTeam) {
         const hasClan = selectedClan ? village.clan === selectedClan : true;
         const hasTeam = selectedTeam ? village.team === selectedTeam : true;
         return hasSearchText && hasClan && hasTeam;
-    });    
+    });
 }
 
 // Otro filtro de aldeas
@@ -48,8 +49,30 @@ function filterVillages(villages, searchText, selectedClan, selectedTeam) {
 
 
 function displayVillages(villages) {
-    // Implement your UI update logic here
-    console.table(villages); // For demonstration, we use console.table
+    let container = document.getElementById('village-container');
+    container.innerHTML = ''; // Limpiar el contenedor
+
+    if (villages.length === 0) {
+        let noResultsMessage = document.createElement('div');
+        noResultsMessage.className = 'alert alert-warning text-center';
+        noResultsMessage.textContent = 'No se encontraron resultados';
+        container.appendChild(noResultsMessage);
+    }
+    else {
+        villages.forEach(village => {
+            let card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${village.name}</h5>
+                    </div>
+                    `;
+                    console.log(village.name);
+            container.appendChild(card);
+        });
+        
+        console.table(villages); // Para demostración, usamos console.table
+    }
 }
 
 async function init() {
