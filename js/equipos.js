@@ -1,5 +1,6 @@
-let favoriteTeam = []; // Array para almacenar los equipos favoritos
-let allTeams = []; // Array para almacenar todos los equipos
+
+let allTeams = []; 
+let favoriteTeams = []; // Array para almacenar los equipos favoritos
 
 async function fetchTeams() {
     const response = await fetch('https://narutodb.xyz/api/team');
@@ -9,29 +10,26 @@ async function fetchTeams() {
 
 function createTeamCard(team, isFavorite = false) {
     const card = document.createElement('div');
-    card.className = 'col-md-4 mb-4 tarjetas-card'; 
+    card.className = 'col-md-4 mb-4 tarjetas-card';
 
     const teamName = document.createElement('h5');
     teamName.textContent = team.name;
     card.appendChild(teamName);
 
-    // Acceder al primer personaje del equipo
-    const firstCharacter = team.characters[0]; 
+    const firstCharacter = team.characters[0];
     const teamImage = document.createElement('img');
-    teamImage.className = 'img-fluid team-image';
+    teamImage.className = 'img-fluid';
 
-    
     if (team.name === "Ame Orphans") {
         teamImage.src = './assets/Young_Ame_Orphans.webp';
     } else if (firstCharacter && firstCharacter.images && firstCharacter.images.length > 0) {
         teamImage.src = firstCharacter.images[0];
-        teamImage.onerror = function() {
+        teamImage.onerror = function () {
             teamImage.src = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
         };
     } else {
         teamImage.src = 'https://cdn.shopify.com/s/files/1/0046/2779/1960/files/clans_de_naruto.jpg?v=1609139057';
     }
-    
     card.appendChild(teamImage);
 
     const characterSubtitle = document.createElement('h5');
@@ -60,16 +58,16 @@ function createTeamCard(team, isFavorite = false) {
 }
 
 function toggleFavorite(team) {
-    const index = favoriteTeam.findIndex(favTeam => favTeam.name === team.name);
+    const index = favoriteTeams.findIndex(favTeam => favTeam.name === team.name);
     if (index === -1) {
         // Agregar a favoritos
-        favoriteTeam.push(team);
+        favoriteTeams.push(team);
     } else {
         // Quitar de favoritos
-        favoriteTeam.splice(index, 1);
+        favoriteTeams.splice(index, 1);
     }
     // Guardar favoritos en localStorage
-    localStorage.setItem('favoriteTeam', JSON.stringify(favoriteTeam));
+    localStorage.setItem('favoriteTeams', JSON.stringify(favoriteTeams));
     updateFavoriteSection(); // Actualizar sección de favoritos
     updateTeamCards(); // Actualizar las tarjetas originales
 }
@@ -81,8 +79,8 @@ function updateFavoriteSection() {
     favoriteSubtitle.className = 'text-center mb-4 w-100';
     favoriteSubtitle.textContent = 'Equipos Favoritos';
     favoriteContainer.appendChild(favoriteSubtitle);
-    if (favoriteTeam.length > 0) {
-        favoriteTeam.forEach(team => {
+    if (favoriteTeams.length > 0) {
+        favoriteTeams.forEach(team => {
             const card = createTeamCard(team, true); // true para estrella rellena
             card.classList.add('team-card');
             favoriteContainer.appendChild(card);
@@ -100,7 +98,7 @@ function updateTeamCards() {
 
     for (let card of teamCards) {
         const teamName = card.querySelector('h5').textContent;
-        const isFavorite = favoriteTeam.some(favTeam => favTeam.name === teamName);
+        const isFavorite = favoriteTeams.some(favTeam => favTeam.name === teamName);
 
         // Actualizar la estrella en la tarjeta original
         const favoriteStar = card.querySelector('span');
@@ -109,10 +107,21 @@ function updateTeamCards() {
 }
 
 function filterTeamsByMemberCount(teams) {
-    const checkbox = document.getElementById('checkcategory'); 
-    if (checkbox.checked) {
+    const checkboxMas = document.getElementById('checkcategoryMas');
+    const checkboxMenos = document.getElementById('checkcategoryMenos');
+
+    if (checkboxMas.checked && checkboxMenos.checked) {
+        // Si ambos checkboxes están seleccionados, no se filtra nada.
+        return teams;
+    } else if (checkboxMas.checked) {
+        // Filtrar equipos con más de 3 integrantes.
         return teams.filter(team => team.characters.length > 3);
+    } else if (checkboxMenos.checked) {
+        // Filtrar equipos con menos de 4 integrantes.
+        return teams.filter(team => team.characters.length < 4);
     }
+    
+    // Si ninguno está seleccionado, devolver todos los equipos.
     return teams;
 }
 
@@ -130,7 +139,7 @@ async function displayTeams(teams) {
             .map(name => teams.find(team => team.name === name));
 
         uniqueTeams.forEach(team => {
-            const card = createTeamCard(team, favoriteTeam.some(favTeam => favTeam.name === team.name)); // Verificar si es favorito
+            const card = createTeamCard(team, favoriteTeams.some(favTeam => favTeam.name === team.name)); // Verificar si es favorito
             container.appendChild(card);
         });
     }
@@ -141,10 +150,10 @@ function normalizeString(str) {
 }
 
 async function main() {
-    // Obtener equipos favoritos de localStorage
-    const favoriteTeamStr = localStorage.getItem('favoriteTeam');
-    favoriteTeam = favoriteTeamStr ? JSON.parse(favoriteTeamStr) : [];
-   
+    // Cargar favoritos desde localStorage
+    const storedFavorites = localStorage.getItem('favoriteTeams');
+    favoriteTeams = storedFavorites ? JSON.parse(storedFavorites) : []; // Si hay favoritos almacenados, cargarlos
+
     allTeams = await fetchTeams(); // Obtener todos los equipos
     await displayTeams(allTeams); // Mostrar todos los equipos inicialmente
 
@@ -152,19 +161,28 @@ async function main() {
     updateFavoriteSection();
 
     const searchInput = document.getElementById('buscador');
-    searchInput.addEventListener('keyup', () => {
-        const searchTerm = normalizeString(searchInput.value);
-        const filteredTeams = allTeams.filter(team =>
-            normalizeString(team.name).includes(searchTerm) || team.characters.some(character => normalizeString(character.name).includes(searchTerm))
-        );
-        displayTeams(filterTeamsByMemberCount(filteredTeams)); // Mostrar equipos filtrados
-    });
+    const checkboxMas = document.getElementById('checkcategoryMas');
+    const checkboxMenos = document.getElementById('checkcategoryMenos');
 
-    const checkbox = document.getElementById('checkcategory'); 
-    checkbox.addEventListener('change', () => {
-        const filteredTeams = filterTeamsByMemberCount(allTeams);
-        displayTeams(filteredTeams); // Mostrar equipos filtrados por checkbox
-    });
+    function filterAndDisplayTeams() {
+        const searchTerm = normalizeString(searchInput.value);
+
+        // Filtrar equipos por nombre y personajes
+        const filteredTeams = allTeams.filter(team =>
+            normalizeString(team.name).includes(searchTerm) || 
+            team.characters.some(character => normalizeString(character.name).includes(searchTerm))
+        );
+
+        // Aplicar el filtro por cantidad de integrantes
+        const finalFilteredTeams = filterTeamsByMemberCount(filteredTeams);
+        displayTeams(finalFilteredTeams); // Mostrar equipos filtrados
+    }
+
+    searchInput.addEventListener('keyup', filterAndDisplayTeams);
+
+    // Agregar eventos a los checkboxes
+    checkboxMas.addEventListener('change', filterAndDisplayTeams);
+    checkboxMenos.addEventListener('change', filterAndDisplayTeams);
 }
 
 main();

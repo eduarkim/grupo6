@@ -106,13 +106,24 @@ function updateClanCards() {
 }
 
 
-function filterClansByMemberCount(clans) {
-    const checkbox = document.getElementById('checkcategory');
-    if (checkbox.checked) {
-        return clans.filter(clan => clan.characters.length > 5);
+    function filterClansByMemberCount(clans) {
+        const checkboxMas = document.getElementById('checkcategoryMas');
+        const checkboxMenos = document.getElementById('checkcategoryMenos');
+    
+        if (checkboxMas.checked && checkboxMenos.checked) {
+            // Si ambos checkboxes están seleccionados, no se filtra nada.
+            return clans;
+        } else if (checkboxMas.checked) {
+            // Filtrar clanes con más de 5 integrantes.
+            return clans.filter(clan => clan.characters.length > 5);
+        } else if (checkboxMenos.checked) {
+            // Filtrar clanes con menos de 6 integrantes.
+            return clans.filter(clan => clan.characters.length < 6);
+        }
+        
+        // Si ninguno está seleccionado, devolver todos los clanes.
+        return clans;
     }
-    return clans;
-}
 
 async function displayClans(clans) {
     const container = document.getElementById('clan-container');
@@ -138,6 +149,8 @@ function normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
+
+
 async function main() {
     // Cargar favoritos desde localStorage
     const storedFavorites = localStorage.getItem('favoriteClans');
@@ -150,19 +163,28 @@ async function main() {
     updateFavoriteSection();
 
     const searchInput = document.getElementById('buscador');
-    searchInput.addEventListener('keyup', () => {
-        const searchTerm = normalizeString(searchInput.value);
-        const filteredClans = allClans.filter(clan =>
-            normalizeString(clan.name).includes(searchTerm) || clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
-        );
-        displayClans(filterClansByMemberCount(filteredClans)); // Mostrar clanes filtrados
-    });
+    const checkboxMas = document.getElementById('checkcategoryMas');
+    const checkboxMenos = document.getElementById('checkcategoryMenos');
 
-    const checkbox = document.getElementById('checkcategory');
-    checkbox.addEventListener('change', () => {
-        const filteredClans = filterClansByMemberCount(allClans);
-        displayClans(filteredClans); // Mostrar clanes filtrados por checkbox
-    });
+    function filterAndDisplayClans() {
+        const searchTerm = normalizeString(searchInput.value);
+
+        // Filtrar clanes por nombre y personajes
+        const filteredClans = allClans.filter(clan =>
+            normalizeString(clan.name).includes(searchTerm) || 
+            clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
+        );
+
+        // Aplicar el filtro por cantidad de integrantes
+        const finalFilteredClans = filterClansByMemberCount(filteredClans);
+        displayClans(finalFilteredClans); // Mostrar clanes filtrados
+    }
+
+    searchInput.addEventListener('keyup', filterAndDisplayClans);
+
+    // Agregar eventos a los checkboxes
+    checkboxMas.addEventListener('change', filterAndDisplayClans);
+    checkboxMenos.addEventListener('change', filterAndDisplayClans);
 }
 
 main();
