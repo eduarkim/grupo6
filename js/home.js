@@ -31,22 +31,27 @@ fetch("https://narutodb.xyz/api/character?page=1&limit=1431").then(response => r
             
             document.querySelector('.clanes').addEventListener('change', () => {
               let clanFilter = module.filtrosCheckboxClanes(data.characters);
-              pintarCardPersonaje(clanFilter, contenedorPersonajes);
+              let filterText = module.filtrarPersonajesPorTexto(clanFilter, textoIngresado.value.toLowerCase());
+
+              pintarCardPersonaje(filterText, contenedorPersonajes);
             });
 
             document.querySelector('.villages').addEventListener('change', () => {
               let villageFilter = module.filtrosCheckboxVillages(data.characters);
-              pintarCardPersonaje(villageFilter, contenedorPersonajes)
+              let filterText = module.filtrarPersonajesPorTexto(villageFilter, textoIngresado.value.toLowerCase());
+              pintarCardPersonaje(filterText, contenedorPersonajes)
             });
 
             document.querySelector('.kekkeiGenkai').addEventListener('change', () => {
               let kekkeiGenkaiFilter = module.filtrosCheckboxKekkeiGenkai(data.characters);
-              pintarCardPersonaje(kekkeiGenkaiFilter, contenedorPersonajes)
+              let filterText = module.filtrarPersonajesPorTexto(kekkeiGenkaiFilter, textoIngresado.value.toLowerCase());
+              pintarCardPersonaje(filterText, contenedorPersonajes)
             });
 
             document.querySelector('.teams').addEventListener('change', () => {
               let teamsFilter = module.filtrosCheckboxTeam(data.characters);
-              pintarCardPersonaje(teamsFilter, contenedorPersonajes)
+              let filterText = module.filtrarPersonajesPorTexto(teamsFilter, textoIngresado.value.toLowerCase());
+              pintarCardPersonaje(filterText, contenedorPersonajes)
             });
 
             document.getElementById('searchClans').addEventListener('keyup', () => {
@@ -83,7 +88,8 @@ fetch("https://narutodb.xyz/api/character?page=1&limit=1431").then(response => r
 
    document.getElementById('buscarPersonajes').addEventListener('keyup', () => {
         let personajesFiltrados = module.filtrarPersonajesPorTexto(data.characters, textoIngresado.value.toLowerCase());
-        pintarCardPersonaje(personajesFiltrados, contenedorPersonajes);
+        let clan = module.filtrosCheckboxClanes(personajesFiltrados);
+        pintarCardPersonaje(clan, contenedorPersonajes);
     });
     
 });
@@ -113,7 +119,7 @@ function pintarCardPersonaje(arrayCharacters, contenedorCharacters){
       
     else{
       contenedorCharacters.innerHTML = `
-      <div class="">
+      <div class="d-flex justify-content-center">
         <h3>No hay eventos que mostrar</h3>
       </div>
       `

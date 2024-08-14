@@ -9,10 +9,6 @@
     height: 40px;
     width: 100px;
 }
-/* 
-.nav-link{
-    color: white;
-} */
 
 .img-banner{
     height: 190px;
@@ -38,16 +34,49 @@ body{
     border-radius: 0px;
 }
 
+.imgDetails{
+    width: 300px;
+    height: 200px;
+}
+
 .categorias{
     height: 250px;
     width: 100%;
     transition: all 0.2s;
 }
 
+.contenedorClanes, .contenedorAldeas, .contenedorKekkeiGenkai, .contenedorTeams{
+    background: white;
+}
+
+.characters{
+    height: 130vh;
+    width: 65vw;
+}
+.clanes, .villages, .kekkeiGenkai, .teams{
+    background: white;
+    height: 100px;
+}
 .categorias:hover{
     transform: scale(1.15);
 }
 
 .card-header{
     height: 50px;
+}
+
+.details{
+    width: 100vw;
+    min-height: 82vh;
+}
+
+.details-content{
+    box-shadow: 16px 14px 20px black;
+    border-radius: 10px;
+}
+
+.custom-video {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
 }
