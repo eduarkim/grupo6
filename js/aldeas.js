@@ -37,54 +37,20 @@ function displayVillages(villages) {
         noResultsMessage.className = 'alert alert-warning text-center';
         noResultsMessage.textContent = 'No se encontraron resultados';
         container.appendChild(noResultsMessage);
-    } else {
+    }
+    else {
         villages.forEach(village => {
-            let characterImage = '';
-
-            // Determinar la imagen según el nombre o ID de la aldea
-            if (village.name === "Inaho Village") {
-                characterImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_6l5v98rYMuSIcVqVObUp_3h7fqo5aS83mg&s";
-            } else if (village.id == "8") {
-                characterImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBSBVFnSv-rQe1o4Je6lm8d4MrYNdnPwLW6g&s";
-            } else if (village.id === 2) {
-                characterImage = "https://i.pinimg.com/originals/93/cc/1c/93cc1cb30bf97a4c298513cc186180b2.jpg"; // Reemplaza con la URL específica
-            } else if (village.id === 10) {
-                characterImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXgaiaKhqadZYowQZSS-UJ3IHeeqfPsXDoaw&s"; // Reemplaza con la URL específica
-            } else if (village.id === 3) {
-                characterImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIRGVmjN2SbwRGrDkXLw-IONW0jbRfHYRzWA&s"; // Reemplaza con la URL específica
-            } else if (village.id === 19) {
-                characterImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu_mAN63tZAcziEcpJpwwQK0JSVvTIfVT0og&s"; // Reemplaza con la URL específica
-            } else if (village.id === 15) {
-                characterImage = "https://staticg.sportskeeda.com/editor/2022/11/3bf44-16674636134997.png"; // Reemplaza con la URL específica
-            } else {
-                // Si no hay una imagen específica, intenta obtener la imagen del primer personaje
-                let firstCharacter = village.characters[0]; // Obtener el primer personaje
-                characterImage = firstCharacter ? firstCharacter.images[0] : ''; // Obtener la URL de la imagen
-            }
-
             let card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
                 <div class="card-body">
                     <h5 class="card-title">${village.name}</h5>
-                    ${characterImage ? `
-                        <img src="${characterImage}" 
-                             alt="${village.name}" 
-                             class="card-img-top" 
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/150'; console.error('Error loading image:', '${characterImage}');">
-                    ` : ''}
-                </div>
-            `;
-
-            // Agregar un evento de clic a la tarjeta
-            card.addEventListener('click', () => {
-                if (!characterImage) { // Si no hay imagen
-                    console.log(`ID de la aldea: ${village.id}, Nombre de la aldea: ${village.name}`);
-                }
-            });
-
+                    </div>
+                    `;
+                    
             container.appendChild(card);
         });
+        
     }
 }
 
@@ -96,7 +62,6 @@ function generateClanOptions(clans) {
         clanSelect.appendChild(option);
     });
 }
-
 function generateTeamOptions(teams) {
     teams.forEach(team => {
         let option = document.createElement('option');

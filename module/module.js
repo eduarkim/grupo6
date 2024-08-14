@@ -3,16 +3,16 @@
 export function crearCardCharacterCompleto(personaje){
     let cardPersonajeHTML = 
     `
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
-                <h4>${personaje.name}</h4>
+                <h4 class="fs-6">${personaje.name}</h4>
             </div>
             <img class="card-img-top img-card" src="${personaje.images}">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Dead</p>
                 <p class= "card-text clan">Clan: ${personaje.personal.clan}</p>
-                <a id= "btnDetalles" href="" class="btn btn-info w-100">Details</a> 
+                <a id= "btnDetalles" href="./details.html?id=${personaje.id}" class="btn btn-info w-100">Details</a> 
             </div>
         </div>
     </div>
@@ -22,16 +22,16 @@ export function crearCardCharacterCompleto(personaje){
 
 export function crearCardCharacterSinClan(personaje){
     let cardPersonajeHTML = `
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
-                <h4>${personaje.name}</h4>
+                <h4 class="fs-6">${personaje.name}</h4>
             </div>
             <img class="card-img-top img-card" src="${personaje.images}">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: ${personaje.personal.status}</p>
                 <p class= "card-text clan">Clan: Unknown</p>
-                <a id= "btnDetalles" href="" class="btn btn-info w-100">Details</a> 
+                <a id= "btnDetalles" href="./details.html?id=${personaje.id}" class="btn btn-info w-100">Details</a> 
             </div>
         </div>
     </div>
@@ -42,16 +42,16 @@ export function crearCardCharacterSinClan(personaje){
 export function crearCardCharacterSinStatus(personaje){
     let cardPersonajeHTML = `
     
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
-                <h4>${personaje.name}</h4>
+                <h4 class="fs-6">${personaje.name}</h4>
             </div>
             <img class="card-img-top img-card" src="${personaje.images}">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Live</p>
                 <p class= "card-text clan">Clan: ${personaje.personal.clan}</p>
-                <a id= "btnDetalles" href="" class="btn btn-info w-100">Details</a> 
+                <a id= "btnDetalles" href="./details.html?id=${personaje.id}" class="btn btn-info w-100">Details</a> 
             </div>
         </div>
     </div>
@@ -61,16 +61,16 @@ export function crearCardCharacterSinStatus(personaje){
 
 export function crearCardCharacterSinStatusClan(personaje){
     let cardPersonajeHTML = `
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12  col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
-                <h4>${personaje.name}</h4>
+                <h4 class="fs-6" >${personaje.name}</h4>
             </div>
-            <img class="card-img-top img-card" src="${personaje.images}">
+            <img class="card-img-top img-card" src="${personaje.images[0]}">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Unknown</p>
                 <p class= "card-text clan">Clan: Unknown</p>
-                <a id= "btnDetalles" href="" class="btn btn-info w-100">Details</a> 
+                <a id= "btnDetalles" href="./details.html?id=${personaje.id}" class="btn btn-info w-100">Details</a> 
             </div>
         </div>
     </div>
