@@ -63,14 +63,13 @@ async function init() {
         const selectedClan = clanSelect.value;
         const selectedTeam = teamSelect.value;
 
-        const filteredVillages = filterVillages(villages, searchText, "", "");
+        const filteredVillages = filterVillages(villages, searchText, selectedClan, selectedTeam);
         const sortedVillages = sortVillagesByCharacters(filteredVillages, 0);
         displayVillages(sortedVillages);
         console.log(selectedTeam);
-        
     }
 
     searchTextInput.addEventListener('input', updateResults);
-    // clanSelect.addEventListener('change', updateResults);
+    clanSelect.addEventListener('change', updateResults);
     teamSelect.addEventListener('change', updateResults);
 }
