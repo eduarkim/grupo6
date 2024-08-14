@@ -1,4 +1,4 @@
-import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters } from './functions.js';
+import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters, filterVillages } from './functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     init();
@@ -26,28 +26,7 @@ async function fetchVillagesClansTeams() {
     }
 }
 
-
-// Filtrar aldeas
-function filterVillages(villages, searchText, selectedClan, selectedTeam) {
-    return villages.filter(village => {
-        const hasSearchText = village.name.toLowerCase().includes(searchText.toLowerCase());
-        const hasClan = selectedClan ? village.clan === selectedClan : true;
-        const hasTeam = selectedTeam ? village.team === selectedTeam : true;
-        return hasSearchText && hasClan && hasTeam;
-    });
-}
-
-// Otro filtro de aldeas
-// function filterVillages(villages, searchText, selectedClan, selectedTeam) {
-//     return villages.filter(village => 
-//         village.name.toLowerCase().includes(searchText.toLowerCase()) &&
-//         (!selectedClan || village.clan === selectedClan) &&
-//         (!selectedTeam || village.team === selectedTeam)
-//     );
-// }
-
-
-
+// Mostrar las aldeas en pantalla
 function displayVillages(villages) {
     let container = document.getElementById('village-container');
     container.innerHTML = ''; // Limpiar el contenedor
@@ -67,12 +46,28 @@ function displayVillages(villages) {
                     <h5 class="card-title">${village.name}</h5>
                     </div>
                     `;
-                    console.log(village.name);
+                    
             container.appendChild(card);
         });
         
-        console.table(villages); // Para demostración, usamos console.table
     }
+}
+
+function generateClanOptions(clans) {
+    clans.forEach(clan => {
+        let option = document.createElement('option');
+        option.value = clan.name;
+        option.textContent = clan.name;
+        clanSelect.appendChild(option);
+    });
+}
+function generateTeamOptions(teams) {
+    teams.forEach(team => {
+        let option = document.createElement('option');
+        option.value = team.name;
+        option.textContent = team.name;
+        teamSelect.appendChild(option);
+    });
 }
 
 async function init() {
@@ -80,6 +75,13 @@ async function init() {
     const searchTextInput = document.getElementById('searchText');
     const clanSelect = document.getElementById('clanSelect');
     const teamSelect = document.getElementById('teamSelect');
+    const top4Clans = sortClansByCharacters(clans, 4);
+    const top4Teams = sortTeamsByCharacters(teams, 4);
+
+    generateTeamOptions(top4Teams);
+    generateClanOptions(top4Clans);
+
+    displayVillages(sortVillagesByCharacters(villages, 0));
 
     function updateResults() {
         const searchText = searchTextInput.value;
@@ -89,7 +91,6 @@ async function init() {
         const filteredVillages = filterVillages(villages, searchText, selectedClan, selectedTeam);
         const sortedVillages = sortVillagesByCharacters(filteredVillages, 0);
         displayVillages(sortedVillages);
-        console.log(selectedTeam);
     }
 
     searchTextInput.addEventListener('input', updateResults);
