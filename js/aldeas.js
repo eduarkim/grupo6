@@ -1,4 +1,4 @@
-import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters, filterVillages, generateClanOptions, generateTeamOptions } from './functions.js';
+import { fetchData, sortVillagesByCharacters, sortClansByCharacters, sortTeamsByCharacters, filterVillages, generateClanOptions, generateTeamOptions, buscarPropiedad } from './functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     init();
@@ -26,19 +26,6 @@ async function fetchVillagesClansTeams() {
     }
 }
 
-// Función para unir aldeas con sus clanes y equipos
-function mapVillagesWithClansAndTeams(villages, clans, teams) {
-    return villages.map(village => {
-        const clan = clans.find(clan => clan.id === village.clanId) || {};
-        const team = teams.find(team => team.id === village.teamId) || {};
-        return {
-            ...village,
-            clan: clan.name || '',
-            team: team.name || ''
-        };
-    });
-}
-
 // Mostrar las aldeas en pantalla
 function displayVillages(villages) {
     let container = document.getElementById('village-container');
@@ -62,15 +49,12 @@ function displayVillages(villages) {
             `;
             container.appendChild(card);
         });
-        
     }
 }
 
-
-
 async function init() {
     const { villages, clans, teams } = await fetchVillagesClansTeams();
-    const mappedVillages = mapVillagesWithClansAndTeams(villages, clans, teams);
+    
     const searchTextInput = document.getElementById('searchText');
     const clanSelect = document.getElementById('clanSelect');
     const teamSelect = document.getElementById('teamSelect');
@@ -82,12 +66,16 @@ async function init() {
 
     displayVillages(sortVillagesByCharacters(villages, 0));
 
+    //
+    console.log(buscarPropiedad(villages[8], 'clan'));
+    //
+
     function updateResults() {
         const searchText = searchTextInput.value;
         const selectedClan = clanSelect.value;
         const selectedTeam = teamSelect.value;
 
-        const filteredVillages = filterVillages(mappedVillages, searchText, selectedClan, selectedTeam);
+        const filteredVillages = filterVillages(villages, searchText, selectedClan, selectedTeam);
         const sortedVillages = sortVillagesByCharacters(filteredVillages, 0);
         displayVillages(sortedVillages);
     }

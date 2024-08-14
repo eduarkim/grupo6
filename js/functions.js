@@ -40,7 +40,7 @@ export function filterVillages(villages, searchText, selectedClan, selectedTeam)
         return hasSearchText && hasClan && hasTeam;
     });
 }
-
+// Generar opciones de clanes
 export function generateClanOptions(clans) {
     clans.forEach(clan => {
         let option = document.createElement('option');
@@ -49,6 +49,7 @@ export function generateClanOptions(clans) {
         clanSelect.appendChild(option);
     });
 }
+// Generar opciones de equipos
 export function generateTeamOptions(teams) {
     teams.forEach(team => {
         let option = document.createElement('option');
@@ -56,4 +57,19 @@ export function generateTeamOptions(teams) {
         option.textContent = team.name;
         teamSelect.appendChild(option);
     });
+}
+export function buscarPropiedad(objeto, propiedad) {
+    if (objeto.hasOwnProperty(propiedad)) {
+        return objeto[propiedad];
+    } else {
+        for (var clave in objeto) {
+            if (typeof objeto[clave] === 'object') {
+                var resultado = buscarPropiedad(objeto[clave], propiedad);
+                if (resultado !== null) {
+                    return resultado;
+                }
+            }
+        }
+    }
+    return null;
 }
