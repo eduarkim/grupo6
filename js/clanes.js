@@ -7,24 +7,23 @@ async function fetchClans() {
 
     const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
     return filteredClans;
-  //  return data.clans;
 }
 
 function createClanCard(clan, isFavorite = false) {
     const card = document.createElement('div');
-    card.className = 'col-md-4 mb-4 tarjetas-card'; 
+    card.className = 'col-md-4 mb-4 tarjetas-card';
 
     const clanName = document.createElement('h5');
     clanName.textContent = clan.name;
     card.appendChild(clanName);
 
-    const firstCharacter = clan.characters[0]; 
+    const firstCharacter = clan.characters[0];
     const clanImage = document.createElement('img');
     clanImage.className = 'img-fluid';
 
     if (firstCharacter && firstCharacter.images && firstCharacter.images.length > 0) {
         clanImage.src = firstCharacter.images[0];
-        clanImage.onerror = function() {
+        clanImage.onerror = function () {
             clanImage.src = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
         };
     } else {
@@ -44,7 +43,6 @@ function createClanCard(clan, isFavorite = false) {
     });
     card.appendChild(characterList);
 
-    
     // Crear estrella para favoritos
     const favoriteStar = document.createElement('span');
     favoriteStar.textContent = isFavorite ? '★' : '☆'; // Estrella rellena o vacía
@@ -55,19 +53,7 @@ function createClanCard(clan, isFavorite = false) {
     });
     card.appendChild(favoriteStar);
 
-    const detailButton = document.createElement('button');
-    detailButton.className = 'btn btn-primary btn-sm';
-    detailButton.textContent = 'Ver Detalles';
-    detailButton.addEventListener('click', () => {
-        showDetails('clan', clan.id); // Cambiar 'clan' y 'id' según sea necesario
-    });
-    card.appendChild(detailButton);
-
     return card;
-}
-
-function showDetails(type, id) {
-    window.location.href = `./detalleClan.html?type=${type}&id=${id}`;
 }
 
 function toggleFavorite(clan) {
@@ -79,6 +65,8 @@ function toggleFavorite(clan) {
         // Quitar de favoritos
         favoriteClans.splice(index, 1);
     }
+    // Guardar favoritos en localStorage
+    localStorage.setItem('favoriteClans', JSON.stringify(favoriteClans));
     updateFavoriteSection(); // Actualizar sección de favoritos
     updateClanCards(); // Actualizar las tarjetas originales
 }
@@ -97,7 +85,7 @@ function updateFavoriteSection() {
             favoriteContainer.appendChild(card);
         });
         favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
-        favoriteContainer.style.flexWrap = 'wrap'; 
+        favoriteContainer.style.flexWrap = 'wrap';
     } else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
     }
@@ -131,7 +119,7 @@ async function displayClans(clans) {
             .map(name => clans.find(clan => clan.name === name));
 
         uniqueClans.forEach(clan => {
-            const card = createClanCard(clan);
+            const card = createClanCard(clan, favoriteClans.some(favClan => favClan.name === clan.name)); // Verificar si es favorito
             container.appendChild(card);
         });
     }
@@ -142,8 +130,15 @@ function normalizeString(str) {
 }
 
 async function main() {
+    // Cargar favoritos desde localStorage
+    const storedFavorites = localStorage.getItem('favoriteClans');
+    favoriteClans = storedFavorites ? JSON.parse(storedFavorites) : []; // Si hay favoritos almacenados, cargarlos
+
     const clans = await fetchClans(); // Obtener todos los clanes
     await displayClans(clans); // Mostrar todos los clanes inicialmente
+
+    // Actualizar la sección de favoritos al cargar
+    updateFavoriteSection();
 
     const searchInput = document.getElementById('buscador');
     searchInput.addEventListener('keyup', () => {
@@ -156,4 +151,3 @@ async function main() {
 }
 
 main();
-
