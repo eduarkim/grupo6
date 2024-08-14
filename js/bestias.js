@@ -3,6 +3,7 @@ async function fetchTailedBeasts() {
     try {
         const response = await fetch('https://narutodb.xyz/api/tailed-beast');
         const data = await response.json();
+        console.log(data); // Verificar la estructura de los datos
         return data.tailedBeasts || []; // Devolver array de bestias
     } catch (error) {
         console.error('Error fetching Tailed Beasts:', error);

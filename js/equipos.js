@@ -5,6 +5,7 @@ let favoriteTeams = []; // Array para almacenar los equipos favoritos
 async function fetchTeams() {
     const response = await fetch('https://narutodb.xyz/api/team');
     const data = await response.json();
+    console.log(data); // Verificar la estructura de los datos
     return data.teams;
 }
 

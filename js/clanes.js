@@ -6,7 +6,9 @@ async function fetchClans() {
     const data = await response.json();
 
     const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
+    console.log(filteredClans);
     return filteredClans;
+  
 }
 
 function createClanCard(clan, isFavorite = false) {
