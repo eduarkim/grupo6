@@ -1,5 +1,3 @@
-
-
 let favoriteTeam = []; // Array para almacenar los equipos favoritos
 let allTeams = []; // Array para almacenar todos los equipos
 

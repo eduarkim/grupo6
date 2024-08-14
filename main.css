@@ -7,15 +7,6 @@
 
 }
 
-.buscador input[type=text] {
-    text-align: right;
-    padding: 6px;
-    border: solid black 1px;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-}
-
 #buscadorycheckboxs {
 
     margin-top: 1rem;
@@ -41,15 +32,10 @@ body>main {
     min-height: 100vh;
 }
 
-.input-group-text>label {
-    margin-left: 10px;
-}
-
 #containerdetails img {
     height: fit-content;
     padding-top: 1rem;
 }
-
 
 #containercontact textarea {
     height: 100px;
@@ -175,3 +161,4 @@ transition: transform 0.2s;
     border-radius: 5px; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
+
