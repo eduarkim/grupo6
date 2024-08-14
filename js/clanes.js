@@ -1,4 +1,4 @@
-
+let allClans = []; 
 let favoriteClans = []; // Array para almacenar los clanes favoritos
 
 async function fetchClans() {
@@ -105,6 +105,15 @@ function updateClanCards() {
     }
 }
 
+
+function filterClansByMemberCount(clans) {
+    const checkbox = document.getElementById('checkcategory');
+    if (checkbox.checked) {
+        return clans.filter(clan => clan.characters.length > 5);
+    }
+    return clans;
+}
+
 async function displayClans(clans) {
     const container = document.getElementById('clan-container');
     container.innerHTML = ''; // Limpiar el contenedor
@@ -134,8 +143,8 @@ async function main() {
     const storedFavorites = localStorage.getItem('favoriteClans');
     favoriteClans = storedFavorites ? JSON.parse(storedFavorites) : []; // Si hay favoritos almacenados, cargarlos
 
-    const clans = await fetchClans(); // Obtener todos los clanes
-    await displayClans(clans); // Mostrar todos los clanes inicialmente
+    allClans = await fetchClans(); // Obtener todos los clanes
+    await displayClans(allClans); // Mostrar todos los clanes inicialmente
 
     // Actualizar la sección de favoritos al cargar
     updateFavoriteSection();
@@ -143,11 +152,19 @@ async function main() {
     const searchInput = document.getElementById('buscador');
     searchInput.addEventListener('keyup', () => {
         const searchTerm = normalizeString(searchInput.value);
-        const filteredClans = clans.filter(clan =>
+        const filteredClans = allClans.filter(clan =>
             normalizeString(clan.name).includes(searchTerm) || clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
         );
-        displayClans(filteredClans); // Mostrar clanes filtrados
+        displayClans(filterClansByMemberCount(filteredClans)); // Mostrar clanes filtrados
+    });
+
+    const checkbox = document.getElementById('checkcategory');
+    checkbox.addEventListener('change', () => {
+        const filteredClans = filterClansByMemberCount(allClans);
+        displayClans(filteredClans); // Mostrar clanes filtrados por checkbox
     });
 }
 
 main();
+
+
