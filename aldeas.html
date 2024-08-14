@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naruto</title>
+    <title>Aldeas</title>
     <link rel="shortcut icon"
         href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZjUDlxHYd7AaFvei14iSjaZT14m9d_L4oA&s"
         type="image/x-icon">
@@ -30,13 +30,13 @@
                             <a class="nav-link" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-decoration-underline" aria-current="page" href="#">Clanes</a>
+                            <a class="nav-link" href="./clanes.html">Clanes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./aldeas.html">Aldeas</a>
+                            <a class="nav-link active text-decoration-underline" aria-current="page" href="#">Aldeas</a>
                         </li>
-                  <!--       <li class="nav-item">
-                            <a class="nav-link" href="./habilidades">Habilidades</a>
+                   <!--      <li class="nav-item">
+                            <a class="nav-link" href="./">Habilidades</a>
                         </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="./bestias.html">Bestias</a>
@@ -55,7 +55,7 @@
             </div>
         </nav>
     </header>
-    <main id="app">
+    <main>
         <section class="carrusel">
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-indicators">
@@ -75,7 +75,7 @@
                         <video src="./assets/naruto1.mp4" class="d-block w-100 custom-video" alt="..." autoplay loop
                             muted></video>
                         <div class="carousel-caption d-md-block">
-                            <h2>CLANES</h2>
+                            <h2>ALDEAS</h2>
 
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <video src="./assets/naruto2.mp4" class="d-block w-100 custom-video" alt="..." autoplay loop
                             muted></video>
                         <div class="carousel-caption d-md-block">
-                            <h2>CLANES</h2>
+                            <h2>ALDEAS</h2>
 
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                         <video src="./assets/naruto3.mp4" class="d-block w-100 custom-video" alt="..." autoplay loop
                             muted></video>
                         <div class="carousel-caption d-md-block">
-                            <h2>CLANES</h2>
+                            <h2>ALDEAS</h2>
 
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <video src="./assets/naruto4.mp4" class="d-block w-100 custom-video" alt="..." autoplay loop
                             muted></video>
                         <div class="carousel-caption d-md-block">
-                            <h2>CLANES</h2>
+                            <h2>ALDEAS</h2>
 
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <video src="./assets/naruto5.mp4" class="d-block w-100 custom-video" alt="..." autoplay loop
                             muted></video>
                         <div class="carousel-caption d-md-block">
-                            <h2>CLANES</h2>
+                            <h2>ALDEAS</h2>
 
                         </div>
                     </div>
@@ -129,39 +129,40 @@
 
         <div class="container" id="buscadorycheckboxs">
             <div class="container-fluid row justify-content-center align-items-center">
-                
-                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" value="" id="checkcategoryMas" name="checkcategoryMas">
-                    <label class="form-check-label" for="checkcategoryMas">Más de 5 integ.</label>
+
+                <div class="container col-8" id="divcheckboxs">
+
                 </div>
-                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
-                   <input class="form-check-input" type="checkbox" value="" id="checkcategoryMenos" name="checkcategoryMenos">
-                   <label class="form-check-label" for="checkcategoryMenos">Menos de 6 integ.</label>
+                <div class="container col-8 col-md-2 col-lg-2">
+
+                    <div id="" class="">
+                        <select class="form-select" aria-label="Default select example" id="teamSelect">
+                            <option value="" selected>Selecciona tu team</option>
+                        </select>
+                        <select class="form-select" aria-label="Default select example" id="clanSelect">
+                            <option value="" selected>Selecciona tu clan</option>
+                        </select>
+                    </div>
+
+                    <div class="col-8 col-md-5 col-lg-5">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                            id="searchText">
+
+
+                    </div>
+
+
                 </div>
-        
-                <div class="col-8 col-md-5 col-lg-5"> 
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="buscador">
-                </div>
-        
+
             </div>
+
         </div>
 
         <div class="container">
-
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center"
-                id="clan-container">
-
-            </div>
-            <div id="favorite-container"
-                class="mt-5 row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center"
-                style="display: none;">
-            
-         
-            </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck" id="village-container"></div>
 
         </div>
 
-     
     </main>
 
     <footer>
@@ -176,9 +177,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <!--    <script src="./datajs/dataindex.js" type="module"></script> -->
-    <script src="./js/clanes.js"></script>
-    <!--   <script src="./module/funciones.js" type="module"></script> -->
-<!--     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/aldeas.js" type="module"></script>
+    <!-- <script src="./module/funciones.js" type="module"></script> -->
 </body>
 
 </html>
+
+<!-- Autor: David Ramírez -->
