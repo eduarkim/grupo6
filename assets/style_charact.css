@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.logo{
+    height: 40px;
+    width: 100px;
+}
+
+.nav-link{
+    color: white;
+}
+
+.img-banner{
+    height: 190px;
+    width: 100%;
+}
+
+body{
+   background: -webkit-linear-gradient(0deg, #f7f7f7,#86bff3);                                                                              
+}
+
+
+.card{
+    height: 350px;
+    transition: all 0.2s;
+}
+
+.card:hover{
+   transform: scale(1.15);
+}
+
+.img-card{
+    height: 40%;
+    border-radius: 0px;
+}
+
+.categorias{
+    height: 250px;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.categorias:hover{
+    transform: scale(1.15);
+}
+
+.card-header{
+    height: 50px;
+}
