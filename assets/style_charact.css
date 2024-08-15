@@ -94,6 +94,8 @@ body{
 .details-content{
     box-shadow: 16px 14px 20px black;
     border-radius: 10px;
+    color: white;
+    border: solid 1px white;
 }
 
 .custom-video {

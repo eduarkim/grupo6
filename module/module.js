@@ -1,7 +1,20 @@
+const imagenesEspecificas ={
+    'Zero-Tails': 'https://static.wikia.nocookie.net/naruto/images/8/87/Zero_tails.PNG/revision/latest/scale-to-width-down/300?cb=20120518185128'
+};
+const narutito = 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+function obtenerImagen(personaje){
+    if (imagenesEspecificas[personaje.name]) {
+        return imagenesEspecificas[personaje.name];
+    } else if (imagenesEspecificas[personaje.id]) {
+        return imagenesEspecificas[personaje.id];
+    } else {
+        return personaje.images && personaje.images[0] ? personaje.images[0] : 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+    }
+}
 
 
 export function crearCardCharacterCompleto(personaje){
-    let imageUrl = personaje.images && personaje.images[0] ? personaje.images[0] : 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+    let imageUrl = obtenerImagen(personaje);
     let cardPersonajeHTML = 
     `
     <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -9,7 +22,7 @@ export function crearCardCharacterCompleto(personaje){
             <div class = "card-header d-flex justify-content-center align-items-center">
                 <h4 class="fs-6">${personaje.name}</h4>
             </div>
-            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src='https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';" onclick="console.log('Imagen de ${personaje.name}  e id ${personaje.id} clickeada');">
+            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src=${narutito};" onclick="console.log('Imagen de ${personaje.name}  e id ${personaje.id} clickeada');">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Dead</p>
                 <p class= "card-text clan">Clan: ${personaje.personal.clan}</p>
@@ -22,14 +35,14 @@ export function crearCardCharacterCompleto(personaje){
 }
 
 export function crearCardCharacterSinClan(personaje){
-    let imageUrl = personaje.images && personaje.images[0] ? personaje.images[0] : 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+    let imageUrl = obtenerImagen(personaje);
     let cardPersonajeHTML = `
     <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
                 <h4 class="fs-6">${personaje.name}</h4>
             </div>
-            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src='https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';" onclick="console.log('Imagen de ${personaje.name}  e id ${personaje.id}  clickeada');">
+            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src=${narutito};" onclick="console.log('Imagen de ${personaje.name}  e id ${personaje.id}  clickeada');">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: ${personaje.personal.status}</p>
                 <p class= "card-text clan">Clan: Unknown</p>
@@ -42,7 +55,7 @@ export function crearCardCharacterSinClan(personaje){
 }
 
 export function crearCardCharacterSinStatus(personaje){
-    let imageUrl = personaje.images && personaje.images[0] ? personaje.images[0] : 'https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';
+    let imageUrl = obtenerImagen(personaje);
     let cardPersonajeHTML = `
     
     <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -50,7 +63,7 @@ export function crearCardCharacterSinStatus(personaje){
             <div class = "card-header d-flex justify-content-center align-items-center">
                 <h4 class="fs-6">${personaje.name}</h4>
             </div>
-            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src='https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';" onclick="console.log('Imagen de ${personaje.name} e id ${personaje.id} clickeada');">
+            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src=${narutito};" onclick="console.log('Imagen de ${personaje.name} e id ${personaje.id} clickeada');">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Live</p>
                 <p class= "card-text clan">Clan: ${personaje.personal.clan}</p>
@@ -63,13 +76,14 @@ export function crearCardCharacterSinStatus(personaje){
 }
 
 export function crearCardCharacterSinStatusClan(personaje){
+    let imageUrl = obtenerImagen(personaje);
     let cardPersonajeHTML = `
     <div class="col-12  col-md-6 col-lg-4 mb-4">
         <div class="card border-primary text-bg-light">
             <div class = "card-header d-flex justify-content-center align-items-center">
                 <h4 class="fs-6" >${personaje.name}</h4>
             </div>
-            <img class="card-img-top img-card" src="${personaje.images[0]}" onerror="this.onerror=null;this.src='https://www.shutterstock.com/image-illustration/naruto-chibinaruto-animenaruto-vectoranime-character-260nw-2425023909.jpg';" onclick="console.log('Imagen de ${personaje.name} clickeada');">
+            <img class="card-img-top img-card" src="${imageUrl}" onerror="this.onerror=null;this.src=${narutito};" onclick="console.log('Imagen de ${personaje.name} clickeada');">
             <div class = "card-body d-flex flex-column justify-content-center">
                 <p class= "card-text status">Status: Unknown</p>
                 <p class= "card-text clan">Clan: Unknown</p>
