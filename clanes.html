@@ -35,14 +35,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./aldeas.html">Aldeas</a>
                         </li>
+         
                         <li class="nav-item">
-                            <a class="nav-link" href="./habilidades">Habilidades</a>
+                            <a class="nav-link" href="./bestias.html">Bestias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=".bestias">Bestias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./personajes">Personajes</a>
+                            <a class="nav-link" href="./characters.html">Personajes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./equipos.html">Equipos</a>
@@ -130,30 +128,39 @@
         <div class="container" id="buscadorycheckboxs">
             <div class="container-fluid row justify-content-center align-items-center">
                 
-                <div class="form-check col-4 col-md-3 col-lg-3 text-center">
-                    <input class="form-check-input" type="checkbox" value="" id="checkcategory" name="checkcategory">
-                    <label class="form-check-label" for="checkcategory">Clan con más de 5 miembros</label>
+                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" id="checkcategoryMas" name="checkcategoryMas">
+                    <label class="form-check-label" for="checkcategoryMas">5 Integ. o más</label>
+                </div>
+                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
+                   <input class="form-check-input" type="checkbox" value="" id="checkcategoryMenos" name="checkcategoryMenos">
+                   <label class="form-check-label" for="checkcategoryMenos">4 Integ. o menos</label>
                 </div>
         
-                <div class="col-8 col-md-5 col-lg-5"> 
+                <div class="col-8 col-md-5 col-lg-5 d-flex align-items-center"> 
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="buscador">
+                    <button class="btn" id="openFavoritesBtn">Mostrar Favoritos</button>
                 </div>
         
             </div>
         </div>
 
         <div class="container">
+            <div id="favoriteModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="favorite-container" class="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center">
+                    </div>
+                </div>
+              
+            </div>
+           
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center"
                 id="clan-container">
 
             </div>
-            <div id="favorite-container"
-                class="mt-5 row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center"
-                style="display: none;">
-            
          
-            </div>
 
         </div>
 
@@ -174,7 +181,7 @@
     <!--    <script src="./datajs/dataindex.js" type="module"></script> -->
     <script src="./js/clanes.js"></script>
     <!--   <script src="./module/funciones.js" type="module"></script> -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!--     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
 </body>
 
 </html>

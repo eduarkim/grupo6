@@ -15,7 +15,7 @@ async function fetchAkatsukiMembers() {
 
 function createTableRow(member) {
     const row = document.createElement('tr');
-
+  
     const imageCell = document.createElement('td');
     const image = document.createElement('img');
     image.className = 'member-image';

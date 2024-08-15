@@ -4,9 +4,12 @@ let favoriteClans = []; // Array para almacenar los clanes favoritos
 async function fetchClans() {
     const response = await fetch('https://narutodb.xyz/api/clan');
     const data = await response.json();
-
-    const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
-    return filteredClans;
+ //   const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
+ 
+ 
+    console.log(data.clans); 
+    return data.clans;
+  
 }
 
 function createClanCard(clan, isFavorite = false) {
@@ -75,20 +78,21 @@ function updateFavoriteSection() {
     const favoriteContainer = document.getElementById('favorite-container');
     favoriteContainer.innerHTML = ''; // Limpiar el contenedor de favoritos
     const favoriteSubtitle = document.createElement('h3');
-    favoriteSubtitle.className = 'text-center mb-4 w-100';
+    favoriteSubtitle.className = 'text-center mb-2 w-100';
     favoriteSubtitle.textContent = 'Clanes Favoritos';
     favoriteContainer.appendChild(favoriteSubtitle);
-    if (favoriteClans.length > 0) {
+     if (favoriteClans.length > 0) {
         favoriteClans.forEach(clan => {
             const card = createClanCard(clan, true); // true para estrella rellena
             card.classList.add('clan-card');
             favoriteContainer.appendChild(card);
         });
-        favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
-        favoriteContainer.style.flexWrap = 'wrap';
-    } else {
+    //    favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
+      //  favoriteContainer.style.flexWrap = 'wrap';
+ //  showModal();
+    } /* else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
-    }
+    } */
 }
 
 function updateClanCards() {
@@ -105,14 +109,49 @@ function updateClanCards() {
     }
 }
 
+// Función para mostrar el modal
+function showModal() {
+    const modal = document.getElementById('favoriteModal');
+    modal.style.display = 'block';
 
-function filterClansByMemberCount(clans) {
-    const checkbox = document.getElementById('checkcategory');
-    if (checkbox.checked) {
-        return clans.filter(clan => clan.characters.length > 5);
-    }
-    return clans;
+    // Obtener el botón de cierre
+    const closeBtn = modal.querySelector('.close');
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    // Cerrar el modal si se hace clic fuera del contenido
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
 }
+
+document.getElementById('openFavoritesBtn').addEventListener('click', function() {
+    showModal();
+});
+
+
+
+    function filterClansByMemberCount(clans) {
+        const checkboxMas = document.getElementById('checkcategoryMas');
+        const checkboxMenos = document.getElementById('checkcategoryMenos');
+    
+        if (checkboxMas.checked && checkboxMenos.checked) {
+            // Si ambos checkboxes están seleccionados, no se filtra nada.
+            return clans;
+        } else if (checkboxMas.checked) {
+            // Filtrar clanes con más de 5 integrantes.
+            return clans.filter(clan => clan.characters.length > 5);
+        } else if (checkboxMenos.checked) {
+            // Filtrar clanes con menos de 6 integrantes.
+            return clans.filter(clan => clan.characters.length < 6);
+        }
+        
+        // Si ninguno está seleccionado, devolver todos los clanes.
+        return clans;
+    }
 
 async function displayClans(clans) {
     const container = document.getElementById('clan-container');
@@ -138,6 +177,8 @@ function normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
+
+
 async function main() {
     // Cargar favoritos desde localStorage
     const storedFavorites = localStorage.getItem('favoriteClans');
@@ -150,19 +191,28 @@ async function main() {
     updateFavoriteSection();
 
     const searchInput = document.getElementById('buscador');
-    searchInput.addEventListener('keyup', () => {
-        const searchTerm = normalizeString(searchInput.value);
-        const filteredClans = allClans.filter(clan =>
-            normalizeString(clan.name).includes(searchTerm) || clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
-        );
-        displayClans(filterClansByMemberCount(filteredClans)); // Mostrar clanes filtrados
-    });
+    const checkboxMas = document.getElementById('checkcategoryMas');
+    const checkboxMenos = document.getElementById('checkcategoryMenos');
 
-    const checkbox = document.getElementById('checkcategory');
-    checkbox.addEventListener('change', () => {
-        const filteredClans = filterClansByMemberCount(allClans);
-        displayClans(filteredClans); // Mostrar clanes filtrados por checkbox
-    });
+    function filterAndDisplayClans() {
+        const searchTerm = normalizeString(searchInput.value);
+
+        // Filtrar clanes por nombre y personajes
+        const filteredClans = allClans.filter(clan =>
+            normalizeString(clan.name).includes(searchTerm) || 
+            clan.characters.some(character => normalizeString(character.name).includes(searchTerm))
+        );
+
+        // Aplicar el filtro por cantidad de integrantes
+        const finalFilteredClans = filterClansByMemberCount(filteredClans);
+        displayClans(finalFilteredClans); // Mostrar clanes filtrados
+    }
+
+    searchInput.addEventListener('keyup', filterAndDisplayClans);
+
+    // Agregar eventos a los checkboxes
+    checkboxMas.addEventListener('change', filterAndDisplayClans);
+    checkboxMenos.addEventListener('change', filterAndDisplayClans);
 }
 
 main();

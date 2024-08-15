@@ -33,14 +33,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./aldeas.html">Aldeas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./habilidades">Habilidades</a>
-                        </li>
+    
                         <li class="nav-item">
                             <a class="nav-link" href=".bestias">Bestias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./personajes">Personajes</a>
+                            <a class="nav-link" href="./characters.html">Personajes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active text-decoration-underline" aria-current="page" href="#">Equipos</a>
@@ -123,9 +121,13 @@
         <div class="container" id="buscadorycheckboxs">
             <div class="container-fluid row justify-content-center align-items-center">
                 
-                <div class="form-check col-4 col-md-3 col-lg-3 text-center">
-                    <input class="form-check-input" type="checkbox" value="" id="checkcategory" name="checkcategory">
-                    <label class="form-check-label" for="checkcategory">Equipo con más de 3 miembros</label>
+                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" id="checkcategoryMas" name="checkcategoryMas">
+                    <label class="form-check-label" for="checkcategoryMas">4 integ. o más</label>
+                </div>
+                <div class="form-check col-4 col-md-3 col-lg-3 text-center d-flex align-items-center">
+                   <input class="form-check-input" type="checkbox" value="" id="checkcategoryMenos" name="checkcategoryMenos">
+                   <label class="form-check-label" for="checkcategoryMenos">3 integ. o menos</label>
                 </div>
         
                 <div class="col-8 col-md-5 col-lg-5"> 
@@ -136,12 +138,13 @@
         </div>
 
         <div class="container">
+            <div class="container">
+                <div id="favorite-container-eq" class="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center rounded border border-info bg-light">
+            </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center" id="team-container">
                
             </div>
-            <div id="favorite-container"
-            class="mt-5 row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck justify-content-center"
-            style="display: none;">
+          
         
      
         </div>
