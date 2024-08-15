@@ -13,15 +13,33 @@
     margin-bottom: 1rem;
 
 }
+nav{
+    background-image: url(../img/navbar1.jpg);
+    background-size: 100%;
+    background-position: 100% 40%;
+}
+
+.links{
+    width: 60px;
+    height: 30px;
+}
+
+.links2{
+    width: 90px;
+    height: 30px;
+}
+
 body{
-    background: -webkit-linear-gradient(0deg, #f7f7f7,#86bff3);                                                                              
+    background-image: url(./img/backCharacters1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
  
 .card img {
     height: 200px;
     width: 100%;
     object-fit: cover;
-
 }
 
 body>footer {
@@ -180,8 +198,8 @@ background-color: rgb(236, 216, 192);
     display: flex;
     align-items: center; /* Alinea verticalmente el checkbox y el label */
 }
-
-/* .table-custom {
+/* 
+.table-custom {
     background-color: rgb(236, 216, 192); 
 }
 
@@ -191,9 +209,9 @@ background-color: rgb(236, 216, 192);
 
 .table-custom tbody tr:nth-child(even) {
     background-color: rgba(236, 216, 192, 0.5); 
-} 
- */
- .modal {
+} */
+
+.modal {
     display: none; /* Oculto por defecto */
     position: fixed; /* Fijo en la pantalla */
     z-index: 1; /* Se coloca sobre otros elementos */
@@ -243,6 +261,10 @@ background-color: rgb(236, 216, 192);
     gap: 16px; 
     max-height: 70vh; 
     overflow-y: auto;
+    
+}
+#favorite-container-eq h3{
+    color: white;
 }
 #favorite-container {
     width: 60vw;
@@ -269,4 +291,3 @@ background-color: rgb(236, 216, 192);
     height: 1.8rem;
     background-color: rgb(236, 216, 192);
 }
-

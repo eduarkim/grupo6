@@ -115,11 +115,11 @@ function filterTeamsByMemberCount(teams) {
         // Si ambos checkboxes están seleccionados, no se filtra nada.
         return teams;
     } else if (checkboxMas.checked) {
-        // Filtrar equipos con más de 3 integrantes.
-        return teams.filter(team => team.characters.length > 3);
+        // Filtrar equipos mayores o iguales a 4 integrantes.
+        return teams.filter(team => team.characters.length >= 4);
     } else if (checkboxMenos.checked) {
-        // Filtrar equipos con menos de 4 integrantes.
-        return teams.filter(team => team.characters.length < 4);
+        // Filtrar equipos menores o iguales a 3 integrantes.
+        return teams.filter(team => team.characters.length <= 3);
     }
     
     // Si ninguno está seleccionado, devolver todos los equipos.

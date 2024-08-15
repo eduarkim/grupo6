@@ -19,7 +19,28 @@ body{
    background: -webkit-linear-gradient(0deg, #f7f7f7,#86bff3);                                                                              
 }
 
+nav{
+    background-image: url(../img/navbar1.jpg);
+    background-size: 100%;
+    background-position: 100% 40%;
+}
 
+.links{
+    width: 60px;
+    height: 30px;
+}
+
+.links2{
+    width: 90px;
+    height: 30px;
+}
+
+body{
+    background-image: url(../img/backCharacters1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
 .card{
     height: 350px;
     transition: all 0.2s;

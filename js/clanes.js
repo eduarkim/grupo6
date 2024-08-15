@@ -4,10 +4,9 @@ let favoriteClans = []; // Array para almacenar los clanes favoritos
 async function fetchClans() {
     const response = await fetch('https://narutodb.xyz/api/clan');
     const data = await response.json();
+
  //   const filteredClans = data.clans.filter(clan => ![5, 6, 11].includes(clan.id));
- 
- 
-    console.log(data.clans); 
+    console.log(data.clans);
     return data.clans;
   
 }
@@ -81,15 +80,14 @@ function updateFavoriteSection() {
     favoriteSubtitle.className = 'text-center mb-2 w-100';
     favoriteSubtitle.textContent = 'Clanes Favoritos';
     favoriteContainer.appendChild(favoriteSubtitle);
-     if (favoriteClans.length > 0) {
+    if (favoriteClans.length > 0) {
         favoriteClans.forEach(clan => {
             const card = createClanCard(clan, true); // true para estrella rellena
             card.classList.add('clan-card');
             favoriteContainer.appendChild(card);
         });
-    //    favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
-      //  favoriteContainer.style.flexWrap = 'wrap';
- //  showModal();
+ //       favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
+  //      favoriteContainer.style.flexWrap = 'wrap';
     } /* else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
     } */
@@ -108,7 +106,6 @@ function updateClanCards() {
         favoriteStar.textContent = isFavorite ? '★' : '☆'; // Estrella rellena o vacía
     }
 }
-
 // Función para mostrar el modal
 function showModal() {
     const modal = document.getElementById('favoriteModal');
@@ -131,8 +128,6 @@ function showModal() {
 document.getElementById('openFavoritesBtn').addEventListener('click', function() {
     showModal();
 });
-
-
 
     function filterClansByMemberCount(clans) {
         const checkboxMas = document.getElementById('checkcategoryMas');
