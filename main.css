@@ -181,14 +181,85 @@ background-color: rgb(236, 216, 192);
     align-items: center; /* Alinea verticalmente el checkbox y el label */
 }
 
-.table-custom {
-    background-color: rgb(236, 216, 192); /* Color de fondo principal */
+/* .table-custom {
+    background-color: rgb(236, 216, 192); 
 }
 
 .table-custom tbody tr:nth-child(odd) {
-    background-color: rgba(236, 216, 192, 0.7); /* Color más translúcido para filas impares */
+    background-color: rgba(236, 216, 192, 0.7); 
 }
 
 .table-custom tbody tr:nth-child(even) {
-    background-color: rgba(236, 216, 192, 0.5); /* Color más translúcido para filas pares */
+    background-color: rgba(236, 216, 192, 0.5); 
+} 
+ */
+ .modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1; /* Se coloca sobre otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilitar scroll si es necesario */
+    background-color: rgb(0,0,0); /* Color de fondo */
+    background-color: rgba(0,0,0,0.4); /* Fondo con opacidad */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Ancho del modal */
+    max-width: 800px;
+    overflow-y: auto;
+}
+
+/* Botón de cierre */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#favorite-container-eq{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; 
+    max-height: 70vh; 
+    overflow-y: auto;
+}
+#favorite-container {
+    width: 60vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; 
+    max-height: 70vh; 
+    overflow-y: auto;
+}
+
+
+#favorite-container .clan-card {
+    flex: 1 1 calc(20% - 10px); /* Ajustar el tamaño de las tarjetas */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px; /* Asegurar que todas las tarjetas tengan la misma altura */
+   height: auto;
 }

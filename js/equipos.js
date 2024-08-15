@@ -74,10 +74,10 @@ function toggleFavorite(team) {
 }
 
 function updateFavoriteSection() {
-    const favoriteContainer = document.getElementById('favorite-container');
+    const favoriteContainer = document.getElementById('favorite-container-eq');
     favoriteContainer.innerHTML = ''; // Limpiar el contenedor de favoritos
     const favoriteSubtitle = document.createElement('h3');
-    favoriteSubtitle.className = 'text-center mb-4 w-100';
+    favoriteSubtitle.className = 'text-center mb-2 w-100';
     favoriteSubtitle.textContent = 'Equipos Favoritos';
     favoriteContainer.appendChild(favoriteSubtitle);
     if (favoriteTeams.length > 0) {
@@ -88,9 +88,9 @@ function updateFavoriteSection() {
         });
         favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
         favoriteContainer.style.flexWrap = 'wrap';
-    } else {
+    } /* else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
-    }
+    } */
 }
 
 function updateTeamCards() {
