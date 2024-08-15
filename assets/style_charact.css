@@ -14,15 +14,23 @@
     height: 190px;
     width: 100%;
 }
-
-body{
-   background: -webkit-linear-gradient(0deg, #f7f7f7,#86bff3);                                                                              
+p{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+h3{
+    font-size: 2rem;
+    color: rgb(38, 0, 255);
 }
 
 nav{
     background-image: url(../img/navbar1.jpg);
     background-size: 100%;
     background-position: 100% 40%;
+}
+.detallesFondo{
+    background-image: url(../img/fondoDetails.webp);
+    background-size: 100% 100%;
 }
 
 .links{
@@ -42,16 +50,23 @@ body{
     background-size: 100% 100%;
 }
 .card{
-    height: 350px;
+    height: 300px;
     transition: all 0.2s;
+    background:transparent
 }
 
 .card:hover{
    transform: scale(1.15);
 }
 
+.btn{
+    background-image: url(../img/boton.png);
+    background-size: 100% 100%;
+    height: 40px;
+}
+
 .img-card{
-    height: 40%;
+    height: 50% !important;
     border-radius: 0px;
 }
 
@@ -94,8 +109,6 @@ body{
 .details-content{
     box-shadow: 16px 14px 20px black;
     border-radius: 10px;
-    color: white;
-    border: solid 1px white;
 }
 
 .custom-video {

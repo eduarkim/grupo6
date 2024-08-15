@@ -120,8 +120,9 @@ function pintarCardPersonaje(arrayCharacters, contenedorCharacters){
     else{
       contenedorCharacters.innerHTML = `
       <div class="d-flex justify-content-center">
-        <h3>No hay eventos que mostrar</h3>
+        <h3>No hay perosajes que mostrar</h3>
       </div>
       `
     }
 }
+

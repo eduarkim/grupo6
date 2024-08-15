@@ -42,7 +42,7 @@ function personajeCompleto(character){
                     <div class="container d-flex justify-content-center">
                         <img src="${character.images[1]}" alt="details" class=" img-fluid">
                     </div>
-                    <div class="container d-flex flex-column align-items-start rounded" id="details-text">
+                    <div class="container d-flex flex-column align-items-start rounded">
                         <h3 class="d-flex align-self-center mt-3">${character.name}</h3>
                           <p>Anime debut: ${character.debut.anime}</p>
                           <p>Manga debut: ${character.debut.manga}</p>
