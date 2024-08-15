@@ -89,7 +89,7 @@ function updateFavoriteSection() {
         });
     //    favoriteContainer.style.display = 'flex'; // Mostrar sección de favoritos
       //  favoriteContainer.style.flexWrap = 'wrap';
-   showModal();
+ //  showModal();
     } /* else {
         favoriteContainer.style.display = 'none'; // Ocultar sección de favoritos
     } */
@@ -127,6 +127,12 @@ function showModal() {
         }
     };
 }
+
+document.getElementById('openFavoritesBtn').addEventListener('click', function() {
+    showModal();
+});
+
+
 
     function filterClansByMemberCount(clans) {
         const checkboxMas = document.getElementById('checkcategoryMas');

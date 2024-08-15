@@ -263,3 +263,10 @@ background-color: rgb(236, 216, 192);
     min-height: 150px; /* Asegurar que todas las tarjetas tengan la misma altura */
    height: auto;
 }
+
+#openFavoritesBtn{
+    margin-left:5rem;
+    height: 1.8rem;
+    background-color: rgb(236, 216, 192);
+}
+
