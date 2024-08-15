@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.logo{
+    height: 40px;
+    width: 100px;
+}
+
+.img-banner{
+    height: 190px;
+    width: 100%;
+}
+
+body{
+   background: -webkit-linear-gradient(0deg, #f7f7f7,#86bff3);                                                                              
+}
+
+
+.card{
+    height: 350px;
+    transition: all 0.2s;
+}
+
+.card:hover{
+   transform: scale(1.15);
+}
+
+.img-card{
+    height: 40%;
+    border-radius: 0px;
+}
+
+.imgDetails{
+    width: 300px;
+    height: 200px;
+}
+
+.categorias{
+    height: 250px;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.contenedorClanes, .contenedorAldeas, .contenedorKekkeiGenkai, .contenedorTeams{
+    background: white;
+}
+
+.characters{
+    height: 130vh;
+    width: 65vw;
+}
+.clanes, .villages, .kekkeiGenkai, .teams{
+    background: white;
+    height: 100px;
+}
+.categorias:hover{
+    transform: scale(1.15);
+}
+
+.card-header{
+    height: 50px;
+}
+
+.details{
+    width: 100vw;
+    min-height: 82vh;
+}
+
+.details-content{
+    box-shadow: 16px 14px 20px black;
+    border-radius: 10px;
+}
+
+.custom-video {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
+}
